@@ -1,6 +1,6 @@
 .showcase {
     display: grid;
-    grid-template-columns: repeat(auto-fit, 14em);
+    grid-template-columns: repeat(auto-fit, 15em);
     grid-gap: .5em;
     padding: 0;
     margin: 0;

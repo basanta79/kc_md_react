@@ -1,0 +1,11 @@
+.film{
+    text-align: center;
+}
+
+.film__pic{
+    display: inline-block;
+}
+
+.film__name{
+    font-size: 1em;
+}
