@@ -1,15 +1,15 @@
 import React from 'react'
 
-const IMG_URL = "https://image.tmdb.org/t/p/w200"
+import './GalleryMovies.css'
 
 const GalleryMovies = props => {
     console.log(props)
     return (
-    <ul>
+    <ul className="showcase">
         {
             props.items.map (item =>
-                <li>
-                    {IMG_URL + item.poster_path} - {item.title}
+                <li key={props.keyFn(item)} className="showcase__item">
+                    {props.render(item)}
                 </li>    
             )
         }

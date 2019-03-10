@@ -2,6 +2,7 @@
 import React from 'react'
 
 import GalleryMovies from './GalleryMovies'
+import Film from './Film'
 
 const API_KEY="4cf05ebaede3dab03c74b32f4b5a3174"
 // --------- REQUEST TOKEN
@@ -11,7 +12,7 @@ const REQUEST_TOKEN_URL="https://api.themoviedb.org/3/authentication/token/new?a
     "expires_at": "2019-03-09 07:38:01 UTC",
     "request_token": "31fbb3aeb76392094584d4b78a3078d14a95bd33"
 } */
-const REQUEST_TOKEN="31fbb3aeb76392094584d4b78a3078d14a95bd33"
+//const REQUEST_TOKEN="31fbb3aeb76392094584d4b78a3078d14a95bd33"
 
 //---------- APPROVE REQUEST_TOKEN
 //https://www.themoviedb.org/authenticate/{REQUEST_TOKEN}?redirect_to=http://www.yourapp.com/approved
@@ -62,7 +63,9 @@ class FilmList extends React.Component {
         if (errors) {
             return <p> Error 500 !!! </p>
         }
-        return (<GalleryMovies items={movies} />)
+        return (<GalleryMovies items={movies} keyFn={item => item.id} render={ film =>
+            <Film details={film}/>
+        }/>)
     }
 
 }
