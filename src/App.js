@@ -1,6 +1,12 @@
 import React from 'react';
+import { BrowserRouter } from 'react-router-dom'
+
 import './App.css';
-import FilmList from './FilmList'
+import Moviedaba from './Moviedaba'
+
 
 export default () =>
-  <FilmList />
+  <BrowserRouter>
+    <Moviedaba />
+  </BrowserRouter>
+  
