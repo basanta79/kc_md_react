@@ -1,5 +1,6 @@
 /* eslint no-use-before-define: 2 */  // --> OFF
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 import GalleryMovies from './GalleryMovies'
 import Film from './Film'
@@ -64,7 +65,10 @@ class FilmList extends React.Component {
             return <p> Error 500 !!! </p>
         }
         return (<GalleryMovies items={movies} keyFn={item => item.id} render={ film =>
-            <Film details={film}/>
+            <Link to={`/detail/${film.id}`}>
+                <Film details={film}/>
+            </Link>
+
         }/>)
     }
 

@@ -1,0 +1,38 @@
+.filmcard__layout{
+    display: flex;
+    margin: 5% 5% 5% 5%;
+}
+
+.filmcard{
+    display: grid;
+    grid-template-areas: 
+        "pic title"
+        "pic overview"
+        "info info";
+    margin: 0;
+}
+
+.film__poster {
+    grid-area: pic;
+    padding: .5em;
+}
+
+.film__title {
+    grid-area: title;
+    font-size: 2em;
+    padding: .5em;
+}
+
+.film__date {
+    color: grey;
+    font-size: .75em;
+}
+
+.film__overview {
+    grid-area: overview;
+    padding: .5em;
+}
+
+.film__overview h2{
+    font-size: 1em;
+}
