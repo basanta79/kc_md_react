@@ -2,6 +2,7 @@ import React from 'react'
 
 import './Nav.css'
 import { NavLink } from 'react-router-dom'
+import Search from './Search';
 
 export default props =>
     <nav className="menu">
@@ -16,8 +17,11 @@ export default props =>
                 <NavLink className="menu__link menu__button" to='/collections'>Colecciones</NavLink>
             </li>
         </ul>
-        <form action="" className="search__form">
+        <div className="search__form">
+            <Search></Search>
+        </div>
+        {/* <form action="" className="search__form">
             <input type="text" className="search__input" placeholder="Busca pelicula" />
             <button className="search__button">Buscar</button>
-        </form>
+        </form> */}
     </nav>

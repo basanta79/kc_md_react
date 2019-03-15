@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 
 import GalleryMovies from './GalleryMovies'
 import Film from './Film'
+import MoviedabaContext from './MoviedabaContext'
 
 const API_KEY="4cf05ebaede3dab03c74b32f4b5a3174"
 // --------- REQUEST TOKEN
@@ -45,18 +46,14 @@ class FilmList extends React.Component {
 
     async componentDidMount () {
         this.setState({ loading: true })
-        try {
-            const response = await fetch(DISCOVER_MOVIE_URL + API_KEY)
-            const { results } = await response.json()
-            this.setState({movies: results})
-        }catch(err){
-            this.setState({ errors: true })
-        }finally{
-            this.setState({ loading: false })
-        }
+        const movies = await this.props.getPopular()
+        console.log(movies)
+        this.setState({ loading: false})
+        this.setState({movies: movies})
     }
 
-    render () {
+    render () 
+    {
         const { loading, errors, movies} = this.state
         if (loading) {
             return <p> loading..... </p>
@@ -64,14 +61,24 @@ class FilmList extends React.Component {
         if (errors) {
             return <p> Error 500 !!! </p>
         }
-        return (<GalleryMovies items={movies} keyFn={item => item.id} render={ film =>
+
+
+        return (
+          <GalleryMovies items={movies} keyFn={item => item.id} render=
+          { film =>
             <Link to={`/detail/${film.id}`}>
-                <Film details={film}/>
+              <Film details={film}/>
             </Link>
-
-        }/>)
+          }
+          /> 
+        )
     }
-
 }
 
-export default FilmList
+export default  props =>
+    <MoviedabaContext.Consumer>
+        {
+          ({popular}) =>
+            <FilmList getPopular={popular}></FilmList>
+        }
+    </MoviedabaContext.Consumer>
