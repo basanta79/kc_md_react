@@ -20,8 +20,4 @@ export default props =>
         <div className="search__form">
             <Search></Search>
         </div>
-        {/* <form action="" className="search__form">
-            <input type="text" className="search__input" placeholder="Busca pelicula" />
-            <button className="search__button">Buscar</button>
-        </form> */}
     </nav>

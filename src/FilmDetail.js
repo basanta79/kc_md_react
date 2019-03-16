@@ -28,7 +28,7 @@ class FilmDetail extends React.Component {
                                     <div className="filmcard">
                                         <img className="film__poster" src={data.picture} alt=""/>
                                         <h1 className="film__title">{data.title} <span className="film__date">({data.release_date})</span> </h1>
-                                        <div class="film__overview">
+                                        <div className="film__overview">
                                             <h2>Overview:</h2>
                                             <p>{data.overview}</p>
                                         </div>
