@@ -27,9 +27,9 @@ export default class Moviedaba extends React.Component{
     }
 
     popular = async () => {
-            const response = await fetch(DISCOVER_MOVIE_URL + API_KEY)
-            const { results } = await response.json()
-            return results
+        const response = await fetch(DISCOVER_MOVIE_URL + API_KEY)
+        const { results } = await response.json()
+        return results
     }
 
     search = async (searchField) => {

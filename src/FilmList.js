@@ -13,12 +13,33 @@ class FilmList extends React.Component {
         movies: [],
     }
 
+    getSearchString = () => {
+      const result = ""
+      if(window.location.search){
+        const param = new URLSearchParams(window.location.search)
+        const queryToSearch = param.get('search')
+        if (queryToSearch){
+          return queryToSearch
+        }else{
+          return result
+        }
+      } else {
+        return result
+      }
+    }
+
+    // TODO: Extract logic outside ??
     async componentDidMount () {
         this.setState({ loading: true })
-        const movies = await this.props.getPopular()
-        console.log(movies)
-        this.setState({ loading: false})
-        this.setState({movies: movies})
+        let movies = {}
+        const searchString = this.getSearchString()
+        if (searchString){
+          movies = await this.props.searchFilm(searchString)
+        }else{
+          movies = await this.props.getPopular()
+        }
+        this.setState({ loading: false })
+        this.setState({ movies: movies })
     }
 
     render () 
@@ -47,7 +68,7 @@ class FilmList extends React.Component {
 export default  props =>
     <MoviedabaContext.Consumer>
         {
-          ({popular}) =>
-            <FilmList getPopular={popular}></FilmList>
+          ({popular, searchFilm}) =>
+            <FilmList getPopular={popular} searchFilm={searchFilm}></FilmList>
         }
     </MoviedabaContext.Consumer>

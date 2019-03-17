@@ -26,7 +26,12 @@ class Search extends React.Component {
     doSomething = () => {
         if (this.state.redirect){
             this.setState({redirect: false})
-            return <Redirect to='/' /> 
+            if (this.state.film===""){
+                return <Redirect to={`/`} />
+            }else{
+                return <Redirect to={`/?search=${this.state.film}`} />
+            }
+             
         }
     }
 
