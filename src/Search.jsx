@@ -1,7 +1,6 @@
 import React from 'react'
 import Redirect from 'react-router-dom/Redirect'
 
-import MoviedabaContext from './MoviedabaContext';
 
 class Search extends React.Component {
     state = {
@@ -12,38 +11,27 @@ class Search extends React.Component {
     }
 
     render () {
-        const { film, label } = this.state
+        const { search, label } = this.state
         return (
             <div>
-                <form onSubmit={this.search} className="form__search">
-                    <input name="film" value={film} onChange={this.update} placeholder={label}/>
+                <form onSubmit={this.doSomething()} className="form__search">
+                    <input name="search" value={search} onChange={this.update} placeholder={label}/>
                     <input type="submit" value='Buscar'/>
                 </form> 
-                {this.doSomething()}
             </div>
         )
     }
+
     doSomething = () => {
         if (this.state.redirect){
             this.setState({redirect: false})
-            if (this.state.film===""){
+            if (this.state.search===""){
                 return <Redirect to={`/`} />
             }else{
-                return <Redirect to={`/?search=${this.state.film}`} />
+                return <Redirect to={`/?search=${this.state.search}`} />
             }
              
         }
-    }
-
-    search = async event => {
-        event.preventDefault()
-        const { film } = this.state
-        console.log(film)
-        const searchResults = await this.props.onSearch(film)
-        console.log(searchResults)
-        localStorage.setItem('movies', JSON.stringify(searchResults))
-        this.setState({redirect: true})
-
     }
 
     update = event =>{
@@ -53,10 +41,4 @@ class Search extends React.Component {
     }
 }
 
-export default props =>
-    <MoviedabaContext.Consumer>
-        {
-            ({ searchFilm }) =>
-            <Search onSearch={searchFilm} />
-        }
-    </MoviedabaContext.Consumer>
+export default Search
