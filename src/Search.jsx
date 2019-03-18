@@ -4,7 +4,7 @@ import Redirect from 'react-router-dom/Redirect'
 
 class Search extends React.Component {
     state = {
-        film: "", 
+        search: "", 
         label:"Pelicula a buscar",
         redirect: false,
         redirecting: false,
@@ -14,7 +14,7 @@ class Search extends React.Component {
         const { search, label } = this.state
         return (
             <div>
-                <form onSubmit={this.doSomething()} className="form__search">
+                <form onSubmit={this.doSomething} className="form__search">
                     <input name="search" value={search} onChange={this.update} placeholder={label}/>
                     <input type="submit" value='Buscar'/>
                 </form> 
