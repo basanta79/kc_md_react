@@ -59,12 +59,12 @@ class Collections extends React.Component {
                     console.log(found)
                     console.log('El nombre está repetido')
                 }else{
-                    collectionsList.push({name: colName})
+                    collectionsList.push({name: colName, movies:[]})
                     this.setState({collectionsList: collectionsList})
                 }
             }else{
-                collectionsList = [{name: colName}]
-                this.setState({collectionsList: [{name: colName}]})
+                collectionsList = [{name: colName, movies:[]}]
+                this.setState({collectionsList: [{name: colName, movies:[]}]})
             }
             localStorage.setItem('collectionsList',JSON.stringify(collectionsList))
         }
@@ -77,7 +77,7 @@ class Collections extends React.Component {
 export default props =>
     <MoviedabaContext.Consumer>
         {
-            ({ collectionGet }) => 
+            ({ collectionGet}) => 
             <Collections getCollections={collectionGet}></Collections>
         }
     </MoviedabaContext.Consumer>

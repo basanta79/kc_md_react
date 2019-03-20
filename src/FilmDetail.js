@@ -49,7 +49,12 @@ class FilmDetail extends React.Component {
                                         </button>
                                         
                                     </div>
-                                    <Modal show={this.state.isOpen} onClose={this.toggleModal} coleccion={collectionsList}>Contenido del modal</Modal>
+                                    <Modal 
+                                        show={this.state.isOpen} 
+                                        onClose={this.toggleModal} 
+                                        coleccion={collectionsList}
+                                        saveFilm={this.props.saveFilm}
+                                        film={data}></Modal>
                                 </div>
                             )
                         }
@@ -70,7 +75,7 @@ class FilmDetail extends React.Component {
 export default props =>
     <MoviedabaContext.Consumer>
     {
-        ({ collectionGet }) => 
-        <FilmDetail  getCollections={collectionGet} filmId={props.match.params.id}></FilmDetail>
+        ({ collectionGet, addFilmCollection }) => 
+        <FilmDetail  getCollections={collectionGet} filmId={props.match.params.id} saveFilm={addFilmCollection}></FilmDetail>
     }
     </MoviedabaContext.Consumer>

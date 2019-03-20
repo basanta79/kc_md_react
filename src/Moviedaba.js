@@ -20,6 +20,7 @@ export default class Moviedaba extends React.Component{
                 popular: this.popular,
                 searchFilm: this.search,
                 collectionGet: this.collectionRead,
+                addFilmCollection: this.addFilmToCollection,
             }}>
                 <Nav />
                 <Routes />
@@ -47,4 +48,18 @@ export default class Moviedaba extends React.Component{
             return null
         }
     }
+
+    addFilmToCollection = (collectionName, film) => {
+        const collectionsList = JSON.parse(localStorage.getItem('collectionsList'))
+        const collection = collectionsList.find( col => 
+            col.name === collectionName
+        )
+        collection.movies.push(film)
+        console.log(collection)
+        //console.log(collectionName)
+        //console.log(film)
+        localStorage.setItem('collectionsList',JSON.stringify(collectionsList))
+        return true
+    }
+
 }

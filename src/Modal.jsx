@@ -15,12 +15,13 @@ class Modal extends React.Component {
     return (
       <div className="backdrop">
         <div className="modal">
+          {this.props.film.title}
           {
             this.props.coleccion?(
               <ul className="modal__list">
                 {this.props.coleccion.map(
                   item => 
-                    <li key={item.name}>
+                    <li key={item.name} value={item.name} onClick={this.save}>
                       {item.name}
                     </li>  
                 )}
@@ -38,7 +39,9 @@ class Modal extends React.Component {
       </div>
     );
   }
-  
+  save = (event) => {
+    this.props.saveFilm(event.target.textContent, this.props.film)
+  }
 }
 
 
