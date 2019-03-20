@@ -2,9 +2,10 @@ import React from 'react'
 
 import './FilmDetail.css'
 import Film from './Fetch'
+import Modal from './Modal'
 
 class FilmDetail extends React.Component {
-    state = {loading: false, filmInfo: {}, errors: false}
+    state = {loading: false, filmInfo: {}, errors: false, isOpen: false}
 
     async componentDidMount() {
         
@@ -32,7 +33,12 @@ class FilmDetail extends React.Component {
                                             <h2>Overview:</h2>
                                             <p>{data.overview}</p>
                                         </div>
+                                        <button onClick={this.toggleModal}>
+                                            Open the modal
+                                        </button>
+                                        
                                     </div>
+                                    <Modal show={this.state.isOpen} onClose={this.toggleModal}>Contenido del modal</Modal>
                                 </div>
                             )
                         }
@@ -43,6 +49,11 @@ class FilmDetail extends React.Component {
         )
         
     }
+    toggleModal = () => {
+        this.setState({
+          isOpen: !this.state.isOpen
+        });
+      }
 }
 
 export default FilmDetail

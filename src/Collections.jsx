@@ -1,4 +1,7 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+
+import MoviedabaContext from './MoviedabaContext'
 
 class Collections extends React.Component {
     state = {
@@ -8,21 +11,23 @@ class Collections extends React.Component {
     }
 
     componentDidMount () {
-        const collectionsList = JSON.parse(localStorage.getItem('collectionsList'))
+        const collectionsList = this.props.getCollections()
+        this.setState({collectionsList: collectionsList})
+        /* const collectionsList = JSON.parse(localStorage.getItem('collectionsList'))
         if (collectionsList){
             console.log(collectionsList)
         }else{
             console.log('no hay lista')
         }
-        this.setState({collectionsList: collectionsList})
+        this.setState({collectionsList: collectionsList}) */
 
     }
 
     render () {
         const { collectionsList, collectionName, label } = this.state
         return (
-            <div className="showcase">
-                <div className="collection__view">
+            <div className="collection__view">
+                <div className="collection__nav">
                     <form onSubmit={this.createCollection} className="collection__form">
                         <input name="collectionName" value={collectionName} onChange={this.update} placeholder={label}/>
                         <input type="submit" value='crear'/>
@@ -33,7 +38,7 @@ class Collections extends React.Component {
                         collectionsList?
                         (
                             collectionsList.map (item =>
-                                <li>{item.name}</li>)
+                                <Link to={`/collections/${item.name}`}><li>{item.name}</li></Link>)
                         ):(
                             <p>No hay colecciones</p>
                         )
@@ -77,4 +82,10 @@ class Collections extends React.Component {
 
 }
 
-export default Collections
+export default props =>
+    <MoviedabaContext.Consumer>
+        {
+            ({ collectionGet }) => 
+            <Collections getCollections={collectionGet}></Collections>
+        }
+    </MoviedabaContext.Consumer>

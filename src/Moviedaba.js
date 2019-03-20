@@ -19,6 +19,7 @@ export default class Moviedaba extends React.Component{
                 error: false,
                 popular: this.popular,
                 searchFilm: this.search,
+                collectionGet: this.collectionRead,
             }}>
                 <Nav />
                 <Routes />
@@ -36,5 +37,14 @@ export default class Moviedaba extends React.Component{
         const response = await fetch(`${SEARCH_URL}${API_KEY}&query=${searchField}`)
         const { results } = await response.json()
         return results
+    }
+
+    collectionRead = () => {
+        const collectionsList = JSON.parse(localStorage.getItem('collectionsList'))
+        if (collectionsList){
+            return collectionsList
+        }else{
+            return null
+        }
     }
 }
