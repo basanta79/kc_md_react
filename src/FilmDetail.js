@@ -3,19 +3,30 @@ import React from 'react'
 import './FilmDetail.css'
 import Film from './Fetch'
 import Modal from './Modal'
+import MoviedabaContext from './MoviedabaContext'
 
 class FilmDetail extends React.Component {
-    state = {loading: false, filmInfo: {}, errors: false, isOpen: false}
+    state = {
+        loading: false, 
+        filmInfo: {}, 
+        errors: false, 
+        isOpen: false,
+        collectionsList: [],
+    }
 
     async componentDidMount() {
-        
+        const collectionsList = this.props.getCollections()
+        this.setState({ collectionsList: collectionsList })
     }
 
     render () {
-        
+        const { collectionsList } = this.state
+        console.log(collectionsList)
         return (
-            <Film path={`movie/${this.props.match.params.id}`}>
+            <Film path={`movie/${this.props.filmId}`}>
                 {
+                    
+
                     ({data, loading, error}) => {
                         if (loading){
                             return <p>Loading...</p>
@@ -34,11 +45,11 @@ class FilmDetail extends React.Component {
                                             <p>{data.overview}</p>
                                         </div>
                                         <button onClick={this.toggleModal}>
-                                            Open the modal
+                                            Añadir a collección
                                         </button>
                                         
                                     </div>
-                                    <Modal show={this.state.isOpen} onClose={this.toggleModal}>Contenido del modal</Modal>
+                                    <Modal show={this.state.isOpen} onClose={this.toggleModal} coleccion={collectionsList}>Contenido del modal</Modal>
                                 </div>
                             )
                         }
@@ -56,4 +67,10 @@ class FilmDetail extends React.Component {
       }
 }
 
-export default FilmDetail
+export default props =>
+    <MoviedabaContext.Consumer>
+    {
+        ({ collectionGet }) => 
+        <FilmDetail  getCollections={collectionGet} filmId={props.match.params.id}></FilmDetail>
+    }
+    </MoviedabaContext.Consumer>

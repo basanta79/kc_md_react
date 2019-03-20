@@ -13,14 +13,6 @@ class Collections extends React.Component {
     componentDidMount () {
         const collectionsList = this.props.getCollections()
         this.setState({collectionsList: collectionsList})
-        /* const collectionsList = JSON.parse(localStorage.getItem('collectionsList'))
-        if (collectionsList){
-            console.log(collectionsList)
-        }else{
-            console.log('no hay lista')
-        }
-        this.setState({collectionsList: collectionsList}) */
-
     }
 
     render () {
