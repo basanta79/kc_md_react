@@ -21,6 +21,7 @@ export default class Moviedaba extends React.Component{
                 searchFilm: this.search,
                 collectionGet: this.collectionRead,
                 addFilmCollection: this.addFilmToCollection,
+                removeFilmCollection: this.removeFilmFromCollection,
             }}>
                 <Nav />
                 <Routes />
@@ -61,6 +62,24 @@ export default class Moviedaba extends React.Component{
         //console.log(film)
         localStorage.setItem('collectionsList',JSON.stringify(collectionsList))
         return true
+    }
+
+    removeFilmFromCollection = (collectionName, film) => {
+        const collectionsList = JSON.parse(localStorage.getItem('collectionsList'))
+        const collection = collectionsList.find( col => 
+            col.name === collectionName
+        )
+        console.log(collection)
+        const found = collection.movies.find(item => {
+            return item.id===film.id
+        })
+        console.log(collection.movies)
+        const filtered = collection.movies.filter(item => item.id!=film.id)
+        console.log(filtered)
+        collection.movies=filtered
+        localStorage.setItem('collectionsList',JSON.stringify(collectionsList))
+        return true
+
     }
 
 }

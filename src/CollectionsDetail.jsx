@@ -7,6 +7,7 @@ import Film from './Film'
 class CollectionsDetail extends React.Component {
     state = { 
         loading: true,
+        collectionName: "",
         movies: [],
         result: "",
     }
@@ -29,10 +30,11 @@ class CollectionsDetail extends React.Component {
         }
         console.log(nameFound.movies)
         this.setState({movies: nameFound.movies})
+        this.setState({collectionName: nameToFind})
     }
 
     render(){
-        const { loading, result, movies } = this.state
+        const { loading, result, movies, collectionName } = this.state
         if (result){
             return (
                 <p>{result}</p>
@@ -48,7 +50,7 @@ class CollectionsDetail extends React.Component {
           <GalleryMovies items={movies} keyFn={movies => movies.id} render=
           { film =>
             
-              <Film details={film} puntuacion={movies.puntuacion}>
+              <Film details={film} collectionName={collectionName} puntuacion={movies.puntuacion}>
                 <button>Eliminar de coleccion</button>
               </Film>
             
