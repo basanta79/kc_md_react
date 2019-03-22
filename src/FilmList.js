@@ -58,9 +58,8 @@ class FilmList extends React.Component {
         return (
           <GalleryMovies items={movies} keyFn={item => item.id} render=
           { film =>
-            <Link to={`/detail/${film.id}`}>
-              <Film details={film}/>
-            </Link>
+              <Film details={film}>
+              </Film>
           }
           /> 
         )
@@ -70,7 +69,7 @@ class FilmList extends React.Component {
 export default  props =>
     <MoviedabaContext.Consumer>
         {
-          ({popular, searchFilm}) =>
-            <FilmList getPopular={popular} searchFilm={searchFilm}></FilmList>
+          ({popular, searchFilm, addFilmCollection}) =>
+            <FilmList getPopular={popular} searchFilm={searchFilm} saveFilm={addFilmCollection}></FilmList>
         }
     </MoviedabaContext.Consumer>

@@ -54,8 +54,9 @@ export default class Moviedaba extends React.Component{
         const collection = collectionsList.find( col => 
             col.name === collectionName
         )
+        film['puntuacion']=0
         collection.movies.push(film)
-        console.log(collection)
+        console.log(film)
         //console.log(collectionName)
         //console.log(film)
         localStorage.setItem('collectionsList',JSON.stringify(collectionsList))

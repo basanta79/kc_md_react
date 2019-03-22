@@ -41,6 +41,7 @@ class Modal extends React.Component {
   }
   save = (event) => {
     this.props.saveFilm(event.target.textContent, this.props.film)
+    this.props.onClose()
   }
 }
 
