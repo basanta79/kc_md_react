@@ -10,19 +10,24 @@ const IMG_URL = "https://image.tmdb.org/t/p/w200"
 class Film extends React.Component{
     state = {
         loading: false, 
-        filmInfo: {}, 
+        filmId: 0, 
         errors: false, 
         isOpen: false,
         collectionsList: [],
+        score: 0,
     }
 
     async componentDidMount() {
         const collectionsList = this.props.getCollections()
         this.setState({ collectionsList: collectionsList })
+        const scoreReaded = this.props.readScore(this.props.details.id)
+        console.log(this.props.details.id, ":" , scoreReaded)
+        this.setState({filmId: this.props.details.id})
+        this.setState({score: scoreReaded})
     }
 
     render () {
-        const { collectionsList } = this.state
+        const { collectionsList, score } = this.state
         return(
             <div className="film">
                 <Link to={`/detail/${this.props.details.id}`}>
@@ -30,7 +35,7 @@ class Film extends React.Component{
                     <h1 className="film__name">{this.props.details.title}</h1>
                 </Link>
                  <p>
-                     puntuacion: {this.props.details.puntuacion}
+                     puntuacion: {score}
                  </p>
                 <button onClick={this.toggleModal}>
                     Añadir a collección
@@ -63,10 +68,11 @@ class Film extends React.Component{
 export default props =>
     <MoviedabaContext.Consumer>
     {
-        ({ collectionGet, addFilmCollection, removeFilmCollection}) => 
+        ({ collectionGet, addFilmCollection, removeFilmCollection, readScore}) => 
         <Film getCollections={collectionGet} details={props.details} 
                 saveFilm={addFilmCollection} removeFilm={removeFilmCollection}
-                collectionName={props.collectionName}>
+                collectionName={props.collectionName}
+                readScore={readScore}>
             {props.children}
         </Film>
     }

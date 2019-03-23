@@ -22,6 +22,8 @@ export default class Moviedaba extends React.Component{
                 collectionGet: this.collectionRead,
                 addFilmCollection: this.addFilmToCollection,
                 removeFilmCollection: this.removeFilmFromCollection,
+                readScore: this.readScore,
+                saveScore: this.saveScore,
             }}>
                 <Nav />
                 <Routes />
@@ -80,6 +82,44 @@ export default class Moviedaba extends React.Component{
         localStorage.setItem('collectionsList',JSON.stringify(collectionsList))
         return true
 
+    }
+
+    readScore = (filmId) => {
+        const scoreList = JSON.parse(localStorage.getItem('scoreList'))
+        const scoreItem = scoreList.find( item => {
+            return item.id == filmId
+            }
+        )
+        if (scoreItem){
+            return(scoreItem.score)
+        }else{
+            return 0
+        }
+    }
+
+    saveScore = (filmId, score) => {
+        let scoreList = []
+        console.log(filmId, score)
+        scoreList = JSON.parse(localStorage.getItem('scoreList'))
+        if(scoreList){
+            const scoreItem = scoreList.find( item => {
+                return item.id  === filmId
+            })
+            scoreItem?
+                scoreItem.score=score
+            :
+                scoreList.push({
+                    id: filmId,
+                    score: score})
+        }else{
+            scoreList=[]
+            scoreList.push({
+                id: filmId,
+                score: score})
+        }
+        console.log(scoreList)
+        localStorage.setItem('scoreList',JSON.stringify(scoreList))
+        return true
     }
 
 }

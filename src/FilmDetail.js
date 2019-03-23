@@ -12,15 +12,19 @@ class FilmDetail extends React.Component {
         errors: false, 
         isOpen: false,
         collectionsList: [],
+        score: 0,
+        scoreList: [],
     }
 
     async componentDidMount() {
         const collectionsList = this.props.getCollections()
         this.setState({ collectionsList: collectionsList })
+        const scoreRead = this.props.readScore(this.props.filmId)
+        this.setState({score: scoreRead})
     }
 
     render () {
-        const { collectionsList } = this.state
+        const { collectionsList, score } = this.state
         console.log(collectionsList)
         return (
             <Film path={`movie/${this.props.filmId}`}>
@@ -41,6 +45,11 @@ class FilmDetail extends React.Component {
                                         <img className="film__poster" src={data.picture} alt=""/>
                                         <h1 className="film__title">{data.title} <span className="film__date">({data.release_date})</span> </h1>
                                         <div className="film__overview">
+                                            <form onSubmit={this.processScore}>
+                                                <label htmlFor="puntuacion">Puntuación: </label>
+                                                <input type="text"name="score" value={score} onChange={this.changePuntuacion}/>
+                                                <input type="submit" value="cambiar"/>
+                                            </form>
                                             <h2>Overview:</h2>
                                             <p>{data.overview}</p>
                                         </div>
@@ -69,13 +78,30 @@ class FilmDetail extends React.Component {
         this.setState({
           isOpen: !this.state.isOpen
         });
-      }
+    }
+    changePuntuacion = event => {
+        this.setState({
+            [event.target.name]: event.target.value
+        })
+    }
+    processScore = event => {
+        event.preventDefault()
+        let { score } = this.state
+        score>10? score=10:score=score
+        console.log(this.props.filmId, score)
+        const result = this.props.saveScore(this.props.filmId, score)
+    }
 }
 
 export default props =>
     <MoviedabaContext.Consumer>
     {
-        ({ collectionGet, addFilmCollection }) => 
-        <FilmDetail  getCollections={collectionGet} filmId={props.match.params.id} saveFilm={addFilmCollection}></FilmDetail>
+        ({ collectionGet, addFilmCollection, readScore, saveScore }) => 
+        <FilmDetail  
+            getCollections={collectionGet} 
+            filmId={props.match.params.id} 
+            saveFilm={addFilmCollection}
+            readScore={readScore}
+            saveScore={saveScore}></FilmDetail>
     }
     </MoviedabaContext.Consumer>
