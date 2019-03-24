@@ -30,7 +30,7 @@ class Collections extends React.Component {
                         collectionsList?
                         (
                             collectionsList.map ((item, index) =>
-                                <Link to={`/collections/${item.name}`}><li key={index}>{item.name}</li></Link>)
+                                <Link  key={index} to={`/collections/${item.name}`}><li>{item.name}</li></Link>)
                         ):(
                             <p>No hay colecciones</p>
                         )
