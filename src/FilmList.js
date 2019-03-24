@@ -1,6 +1,5 @@
 /* eslint no-use-before-define: 2 */  // --> OFF
 import React from 'react'
-import { Link } from 'react-router-dom'
 
 import GalleryMovies from './GalleryMovies'
 import Film from './Film'

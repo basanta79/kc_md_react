@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 import './Film.css'
 import MoviedabaContext from './MoviedabaContext'
-import Modal from './Modal'
+import Modal from './Modal/Modal'
 
 const IMG_URL = "https://image.tmdb.org/t/p/w200"
 

@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 
 import GalleryMovies from './GalleryMovies'
 import Film from './Film'

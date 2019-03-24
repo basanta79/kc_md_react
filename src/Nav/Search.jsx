@@ -1,5 +1,7 @@
 import React from 'react'
 import Redirect from 'react-router-dom/Redirect'
+import { NavLink } from 'react-router-dom'
+import { browserHistory } from 'react-router';
 
 
 class Search extends React.Component {
@@ -7,7 +9,6 @@ class Search extends React.Component {
         search: "", 
         label:"Pelicula a buscar",
         redirect: false,
-        redirecting: false,
     }
 
     render () {
@@ -22,16 +23,22 @@ class Search extends React.Component {
         )
     }
 
-    doSomething = () => {
-        if (this.state.redirect){
+    doSomething = (event) => {
+        event.preventDefault()
+        //if (this.state.redirect){
             this.setState({redirect: false})
+            console.log(this.state.search)
             if (this.state.search===""){
-                return <Redirect to={`/`} />
+                console.log("redirect to main")
+                window.location='/discover';
+                return <Redirect exact to='/discover' />
             }else{
-                return <Redirect to={`/?search=${this.state.search}`} />
+                console.log("redirect to search")
+                window.location=`/?search=${this.state.search}`;
+                //return <Redirect from='/' to={`/?search=${this.state.search}`} />
             }
              
-        }
+        //}
     }
 
     update = event =>{

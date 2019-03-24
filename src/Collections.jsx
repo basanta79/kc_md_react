@@ -29,8 +29,8 @@ class Collections extends React.Component {
                     {
                         collectionsList?
                         (
-                            collectionsList.map (item =>
-                                <Link to={`/collections/${item.name}`}><li>{item.name}</li></Link>)
+                            collectionsList.map ((item, index) =>
+                                <Link to={`/collections/${item.name}`}><li key={index}>{item.name}</li></Link>)
                         ):(
                             <p>No hay colecciones</p>
                         )
@@ -53,11 +53,10 @@ class Collections extends React.Component {
         const colName = this.state.collectionName
         if (colName){
             if (collectionsList) {
-                console.log(colName)
                 const found = collectionsList.find(collection => collection.name===colName)
                 if (found){
-                    console.log(found)
-                    console.log('El nombre está repetido')
+                    // console.log(found)
+                    // console.log('El nombre está repetido')
                 }else{
                     collectionsList.push({name: colName, movies:[]})
                     this.setState({collectionsList: collectionsList})

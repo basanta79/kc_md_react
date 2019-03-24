@@ -1,12 +1,11 @@
 import React from 'react'
 
-import Nav from './Nav'
+import Nav from './Nav/Nav'
 import Routes from './Routes'
 import MoviedabaContext from './MoviedabaContext'
 
 const API_KEY="4cf05ebaede3dab03c74b32f4b5a3174"
 const DISCOVER_MOVIE_URL = "https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key="
-// https://api.themoviedb.org/3/search/movie?api_key=4cf05ebaede3dab03c74b32f4b5a3174&query=ocean
 const SEARCH_URL = "https://api.themoviedb.org/3/search/movie?api_key="
 
 export default class Moviedaba extends React.Component{

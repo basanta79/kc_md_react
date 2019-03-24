@@ -2,7 +2,7 @@ import React from 'react'
 
 import './FilmDetail.css'
 import Film from './Fetch'
-import Modal from './Modal'
+import Modal from './Modal/Modal'
 import MoviedabaContext from './MoviedabaContext'
 
 class FilmDetail extends React.Component {
