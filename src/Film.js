@@ -57,8 +57,8 @@ class Film extends React.Component{
         });
     }
     al = (event) => {
-        const result = this.props.removeFilm(this.props.collectionName,this.props.details)
-        window.location.reload()
+        const result = this.props.removeFilm(this.props.collectionName,this.props.details) 
+        const temp = this.props.reload()
         
     }
 
@@ -68,11 +68,11 @@ class Film extends React.Component{
 export default props =>
     <MoviedabaContext.Consumer>
     {
-        ({ collectionGet, addFilmCollection, removeFilmCollection, readScore}) => 
+        ({ collectionGet, addFilmCollection, removeFilmCollection, readScore, reload}) => 
         <Film getCollections={collectionGet} details={props.details} 
                 saveFilm={addFilmCollection} removeFilm={removeFilmCollection}
                 collectionName={props.collectionName}
-                readScore={readScore}>
+                readScore={readScore} reload={props.reload}>
             {props.children}
         </Film>
     }

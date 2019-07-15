@@ -31,11 +31,9 @@ class Search extends React.Component {
             if (this.state.search===""){
                 console.log("redirect to main")
                 window.location='/discover';
-                return <Redirect exact to='/discover' />
             }else{
                 console.log("redirect to search")
                 window.location=`/?search=${this.state.search}`;
-                //return <Redirect from='/' to={`/?search=${this.state.search}`} />
             }
              
         //}

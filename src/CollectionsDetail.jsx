@@ -11,15 +11,13 @@ class CollectionsDetail extends React.Component {
         result: "",
     }
 
-    async componentDidMount () {
+    async getMovies(collectionToFind) {
         const collectionsList = JSON.parse(localStorage.getItem('collectionsList'))
-        console.log(this.props.match.params.name)
-        const nameToFind = this.props.match.params.name
         let nameFound = []
         if (collectionsList){
-            nameFound = collectionsList.find(item => item.name===nameToFind)
+            nameFound = collectionsList.find(item => item.name===collectionToFind)
             if (nameFound){
-                // this.setState({collections: nameFound.})
+                this.setState({movies: nameFound.movies})
                 this.setState({loading: false})
             }else{
                 this.setState({ result: "La colección especificada no existe"})
@@ -27,9 +25,12 @@ class CollectionsDetail extends React.Component {
         }else{
             this.setState({ result: "No hay colecciones almacenadas"})
         }
-        console.log(nameFound.movies)
-        this.setState({movies: nameFound.movies})
+    }
+
+    async componentDidMount () {
+        const nameToFind = this.props.match.params.name
         this.setState({collectionName: nameToFind})
+        this.getMovies(nameToFind)
     }
 
     render(){
@@ -49,13 +50,19 @@ class CollectionsDetail extends React.Component {
           <GalleryMovies items={movies} keyFn={movies => movies.id} render=
           { film =>
             
-              <Film details={film} collectionName={collectionName} puntuacion={movies.puntuacion}>
+              <Film details={film} collectionName={collectionName} puntuacion={movies.puntuacion} reload={this.reload}>
                 <button>Eliminar de coleccion</button>
               </Film>
             
           }
           /> 
         )
+    }
+
+    reload = () => {
+        const { collectionName } = this.state
+        this.setState({loading: true})
+        this.getMovies(collectionName)
     }
 }
 
