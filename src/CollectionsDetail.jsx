@@ -12,10 +12,8 @@ class CollectionsDetail extends React.Component {
         result: "",
     }
 
-    async componentDidMount () {
-        const nameToFind = this.props.collection
-        this.setState({collectionName: nameToFind})
-        const collection = this.props.readCollection(nameToFind)
+    getMovies(collectionName){
+        const collection = this.props.readCollection(collectionName)
         if(collection!=null){
             if(collection===0){
                 this.setState({ result: "La colección especificada no existe"})
@@ -26,6 +24,12 @@ class CollectionsDetail extends React.Component {
         }else{
             this.setState({ result: "No hay colecciones almacenadas"})
         }
+    } 
+
+    async componentDidMount () {
+        const nameToFind = this.props.collection
+        this.setState({collectionName: nameToFind})
+        this.getMovies(nameToFind)
     }
 
     render(){
@@ -57,7 +61,7 @@ class CollectionsDetail extends React.Component {
     reload = () => {
         const { collectionName } = this.state
         this.setState({loading: true})
-        this.props.readCollection(collectionName)
+        this.getMovies(collectionName)
     }
 }
 
