@@ -1,6 +1,7 @@
 import React from 'react'
 
 import GalleryMovies from './GalleryMovies'
+import MoviedabaContext from './MoviedabaContext'
 import Film from './Film'
 
 class CollectionsDetail extends React.Component {
@@ -11,26 +12,20 @@ class CollectionsDetail extends React.Component {
         result: "",
     }
 
-    async getMovies(collectionToFind) {
-        const collectionsList = JSON.parse(localStorage.getItem('collectionsList'))
-        let nameFound = []
-        if (collectionsList){
-            nameFound = collectionsList.find(item => item.name===collectionToFind)
-            if (nameFound){
-                this.setState({movies: nameFound.movies})
-                this.setState({loading: false})
-            }else{
+    async componentDidMount () {
+        const nameToFind = this.props.collection
+        this.setState({collectionName: nameToFind})
+        const collection = this.props.readCollection(nameToFind)
+        if(collection!=null){
+            if(collection===0){
                 this.setState({ result: "La colección especificada no existe"})
+            }else{
+                this.setState({movies: collection})
+                this.setState({loading: false})
             }
         }else{
             this.setState({ result: "No hay colecciones almacenadas"})
         }
-    }
-
-    async componentDidMount () {
-        const nameToFind = this.props.match.params.name
-        this.setState({collectionName: nameToFind})
-        this.getMovies(nameToFind)
     }
 
     render(){
@@ -62,8 +57,14 @@ class CollectionsDetail extends React.Component {
     reload = () => {
         const { collectionName } = this.state
         this.setState({loading: true})
-        this.getMovies(collectionName)
+        this.props.readCollection(collectionName)
     }
 }
 
-export default CollectionsDetail
+export default props =>
+    <MoviedabaContext.Consumer>
+        {
+            ({ readCollection }) =>
+            <CollectionsDetail readCollection={readCollection} collection={props.match.params.name} />
+        }
+    </MoviedabaContext.Consumer>
