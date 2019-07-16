@@ -49,23 +49,11 @@ class Collections extends React.Component {
 
     createCollection = event => {
         event.preventDefault()
-        let { collectionsList} = this.state
+        let { collectionsList } = this.state
         const colName = this.state.collectionName
         if (colName){
-            if (collectionsList) {
-                const found = collectionsList.find(collection => collection.name===colName)
-                if (found){
-                    // console.log(found)
-                    // console.log('El nombre está repetido')
-                }else{
-                    collectionsList.push({name: colName, movies:[]})
-                    this.setState({collectionsList: collectionsList})
-                }
-            }else{
-                collectionsList = [{name: colName, movies:[]}]
-                this.setState({collectionsList: [{name: colName, movies:[]}]})
-            }
-            localStorage.setItem('collectionsList',JSON.stringify(collectionsList))
+            const collectionsResult = this.props.addCollection(colName)
+            this.setState({collectionsList: collectionsResult})
         }
         
     }
@@ -76,7 +64,7 @@ class Collections extends React.Component {
 export default props =>
     <MoviedabaContext.Consumer>
         {
-            ({ collectionGet}) => 
-            <Collections getCollections={collectionGet}></Collections>
+            ({ collectionGet, collectionAdd }) => 
+            <Collections getCollections={collectionGet} addCollection={collectionAdd} />
         }
     </MoviedabaContext.Consumer>

@@ -24,6 +24,7 @@ export default class Moviedaba extends React.Component{
                 readScore: this.readScore,
                 saveScore: this.saveScore,
                 readCollection: this.readCollection,
+                collectionAdd : this.collectionAdd,
             }}>
                 <Nav />
                 <Routes />
@@ -50,6 +51,20 @@ export default class Moviedaba extends React.Component{
         }else{
             return null
         }
+    }
+
+    collectionAdd = (collectionName) => {
+        let collectionsList = this.collectionRead()
+        if (collectionsList){
+            const found = collectionsList.find(collection => collection.name===collectionName)
+            if (!found){
+                collectionsList.push({name: collectionName, movies:[]})
+            }
+        }else{
+            collectionsList = [{name: collectionName, movies:[]}]
+        }
+        localStorage.setItem('collectionsList',JSON.stringify(collectionsList))
+        return collectionsList
     }
 
     addFilmToCollection = (collectionName, film) => {
