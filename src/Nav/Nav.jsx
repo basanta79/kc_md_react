@@ -18,6 +18,6 @@ export default props =>
             </li>
         </ul>
         <div className="search__form">
-            <Search></Search>
+            <Search />
         </div>
     </nav>

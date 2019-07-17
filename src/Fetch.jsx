@@ -37,24 +37,3 @@ class Film extends React.Component {
 }
 
 export default Film
-
-/* 
-genres: Array(3)
-    0: {id: 16, name: "Animation"}
-    1: {id: 10751, name: "Family"}
-    2: {id: 12, name: "Adventure"}
-    length: 3
-homepage: "https://www.howtotrainyourdragon.com/"
-id: 166428
-imdb_id: "tt2386490"
-original_language: "en"
-original_title: "How to Train Your Dragon: The Hidden World"
-overview: "As Hiccup fulfills his dream of creating a peaceful dragon utopia, Toothless’ discovery of an untamed, elusive mate draws the Night Fury away. When danger mounts at home and Hiccup’s reign as village chief is tested, both dragon and rider must make impossible decisions to save their kind."
-popularity: 337.563
-poster_path: "/xvx4Yhf0DVH8G4LzNISpMfFBDy2.jpg"
-release_date: "2019-01-03"
-status: "Released"
-title: "How to Train Your Dragon: The Hidden World"
-vote_average: 7.8
-vote_count: 990 
-*/

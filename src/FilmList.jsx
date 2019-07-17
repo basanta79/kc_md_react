@@ -57,8 +57,7 @@ class FilmList extends React.Component {
         return (
           <GalleryMovies items={movies} keyFn={item => item.id} render=
           { film =>
-              <Film details={film}>
-              </Film>
+              <Film details={film} />
           }
           /> 
         )

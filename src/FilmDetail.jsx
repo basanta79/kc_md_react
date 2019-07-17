@@ -102,6 +102,6 @@ export default props =>
             filmId={props.match.params.id} 
             saveFilm={addFilmCollection}
             readScore={readScore}
-            saveScore={saveScore}></FilmDetail>
+            saveScore={saveScore} />
     }
     </MoviedabaContext.Consumer>
