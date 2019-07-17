@@ -7,7 +7,6 @@ class Collections extends React.Component {
     state = {
         collectionsList: [],
         collectionName: "",
-        label: "nombre de colleccion"
     }
 
     componentDidMount () {
@@ -16,12 +15,12 @@ class Collections extends React.Component {
     }
 
     render () {
-        const { collectionsList, collectionName, label } = this.state
+        const { collectionsList, collectionName } = this.state
         return (
             <div className="collection__view">
                 <div className="collection__nav">
                     <form onSubmit={this.createCollection} className="collection__form">
-                        <input name="collectionName" value={collectionName} onChange={this.update} placeholder={label}/>
+                        <input name="collectionName" value={collectionName} onChange={this.update} placeholder={"nombre de colleccion"}/>
                         <input type="submit" value='crear'/>
                     </form>
                 </div>
