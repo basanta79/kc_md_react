@@ -25,7 +25,6 @@ class FilmDetail extends React.Component {
 
     render () {
         const { collectionsList, score } = this.state
-        console.log(collectionsList)
         return (
             <Film path={`movie/${this.props.filmId}`}>
                 {
@@ -88,7 +87,6 @@ class FilmDetail extends React.Component {
         event.preventDefault()
         let { score } = this.state
         score>10? score=10:score=score
-        console.log(this.props.filmId, score)
         const result = this.props.saveScore(this.props.filmId, score)
     }
 }

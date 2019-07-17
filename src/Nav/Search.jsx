@@ -25,18 +25,12 @@ class Search extends React.Component {
 
     doSomething = (event) => {
         event.preventDefault()
-        //if (this.state.redirect){
-            this.setState({redirect: false})
-            console.log(this.state.search)
-            if (this.state.search===""){
-                console.log("redirect to main")
-                window.location='/discover';
-            }else{
-                console.log("redirect to search")
-                window.location=`/?search=${this.state.search}`;
-            }
-             
-        //}
+        this.setState({redirect: false})
+        if (this.state.search===""){
+            window.location='/discover';
+        }else{
+            window.location=`/?search=${this.state.search}`;
+        }
     }
 
     update = event =>{

@@ -14,12 +14,10 @@ class Film extends React.Component {
         let data = {}
         try{
             const data1 = await (await fetch(`${API_HOST}${this.props.path}?api_key=${API_KEY}`)).json()
-            console.log ('data:   ', data)
             data = {
                 ...data1,
                 picture: `${IMG_URL}${data1.poster_path}`,
             }
-            console.log(data.picture)
             this.setState({data, loading:false})
         }catch (error){
             this.setState({error, loading:false})

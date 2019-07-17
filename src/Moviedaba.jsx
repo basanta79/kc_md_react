@@ -74,9 +74,6 @@ export default class Moviedaba extends React.Component{
         )
         film['puntuacion']=0
         collection.movies.push(film)
-        console.log(film)
-        //console.log(collectionName)
-        //console.log(film)
         localStorage.setItem('collectionsList',JSON.stringify(collectionsList))
         return true
     }
@@ -86,13 +83,10 @@ export default class Moviedaba extends React.Component{
         const collection = collectionsList.find( col => 
             col.name === collectionName
         )
-        console.log(collection)
         const found = collection.movies.find(item => {
             return item.id===film.id
         })
-        console.log(collection.movies)
         const filtered = collection.movies.filter(item => item.id!=film.id)
-        console.log(filtered)
         collection.movies=filtered
         localStorage.setItem('collectionsList',JSON.stringify(collectionsList))
         return true
@@ -129,7 +123,6 @@ export default class Moviedaba extends React.Component{
 
     saveScore = (filmId, score) => {
         let scoreList = []
-        console.log(filmId, score)
         scoreList = JSON.parse(localStorage.getItem('scoreList'))
         if(scoreList){
             const scoreItem = scoreList.find( item => {
@@ -147,7 +140,6 @@ export default class Moviedaba extends React.Component{
                 id: filmId,
                 score: score})
         }
-        console.log(scoreList)
         localStorage.setItem('scoreList',JSON.stringify(scoreList))
         return true
     }

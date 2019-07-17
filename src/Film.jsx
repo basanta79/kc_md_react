@@ -21,7 +21,6 @@ class Film extends React.Component{
         const collectionsList = this.props.getCollections()
         this.setState({ collectionsList: collectionsList })
         const scoreReaded = this.props.readScore(this.props.details.id)
-        console.log(this.props.details.id, ":" , scoreReaded)
         this.setState({filmId: this.props.details.id})
         this.setState({score: scoreReaded})
     }

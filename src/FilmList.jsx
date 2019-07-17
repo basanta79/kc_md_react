@@ -27,18 +27,15 @@ class FilmList extends React.Component {
       }
     }
 
-    // TODO: Extract logic outside ??
     async componentDidMount () {
         this.setState({ loading: true })
         let movies = {}
         const searchString = this.getSearchString()
-        // console.log(searchString)
         if (searchString){
           movies = await this.props.searchFilm(searchString)
         }else{
           movies = await this.props.getPopular()
         }
-        // console.log(movies)
         this.setState({ loading: false })
         this.setState({ movies: movies })
     }
