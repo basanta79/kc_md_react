@@ -79,15 +79,12 @@ class FilmDetail extends React.Component {
         });
     }
     changePuntuacion = event => {
-        this.setState({
-            [event.target.name]: event.target.value
-        })
+        const score = Math.min(event.target.value, 10)
+        this.setState({score})
     }
     processScore = event => {
         event.preventDefault()
-        let { score } = this.state
-        score>10? score=10:score=score
-        const result = this.props.saveScore(this.props.filmId, score)
+        this.props.saveScore(this.props.filmId, this.state.score)
     }
 }
 
